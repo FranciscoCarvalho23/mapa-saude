@@ -1,15 +1,28 @@
+# Cache de runtime (OSRM, Nominatim, blocos do Overpass).
 cache/*
 !cache/.htaccess
+
+# Definições locais: contém o teu email real.
 config.local.php
+
+# Node (só usado pelos testes de browser).
 node_modules/
 package.json
 package-lock.json
+
+# Estado dos servidores falsos usados nos testes.
 testes/falso_estado.json
 testes/falso_pedidos.log
+testes/falso_*.log
+testes/falso_*.json
 
-# data/unidades.json É para fazer commit: é o que faz a página arrancar sem esperar.
-# Os mapas nacionais são grandes e fáceis de voltar a gerar, por isso ficam de fora.
-data/grelha_*.json
-# O modelo e as otimizações derivam dos mapas nacionais: regeneram-se com dois comandos.
-data/modelo_tempo_*.json
+# Ficheiros de sistema.
+.DS_Store
+__MACOSX/
+
+# Os mapas nacionais e o modelo vão para o repositório de propósito:
+# sem eles o separador «Pessoas» não funciona numa instalação nova,
+# e regerá-los exige um OSRM próprio. Menos de 1 MB no total.
+
+# Resultados de otimização: pesados, derivados, fáceis de regerar.
 data/otimizacao_*.json

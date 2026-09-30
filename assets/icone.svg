@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-label="Acesso à saúde">
+    <rect width="192" height="192" rx="28" fill="#1C2B36"/>
+    <path d="M96 168s-56-36-56-78a34 34 0 0 1 56-26 34 34 0 0 1 56 26c0 42-56 78-56 78z" fill="#2457A6"/>
+    <path d="M84 62h24v22h22v24h-22v22H84v-22H62V84h22z" fill="#FFFFFF"/>
+</svg>

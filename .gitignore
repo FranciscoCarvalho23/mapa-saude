@@ -1,0 +1,15 @@
+cache/*
+!cache/.htaccess
+config.local.php
+node_modules/
+package.json
+package-lock.json
+testes/falso_estado.json
+testes/falso_pedidos.log
+
+# data/unidades.json É para fazer commit: é o que faz a página arrancar sem esperar.
+# Os mapas nacionais são grandes e fáceis de voltar a gerar, por isso ficam de fora.
+data/grelha_*.json
+# O modelo e as otimizações derivam dos mapas nacionais: regeneram-se com dois comandos.
+data/modelo_tempo_*.json
+data/otimizacao_*.json

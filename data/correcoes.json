@@ -1,0 +1,152 @@
+{
+ "adicionar_tipo": {
+  "way/805944793": [
+   "maternidade"
+  ],
+  "way/365905085": [
+   "maternidade"
+  ],
+  "way/309605882": [
+   "maternidade"
+  ],
+  "way/134573230": [
+   "maternidade"
+  ],
+  "way/118467672": [
+   "maternidade"
+  ],
+  "node/2041651512": [
+   "maternidade"
+  ],
+  "way/25689164": [
+   "maternidade"
+  ],
+  "way/126366393": [
+   "maternidade"
+  ],
+  "way/36362332": [
+   "maternidade"
+  ],
+  "way/26120268": [
+   "maternidade"
+  ],
+  "way/490137959": [
+   "maternidade"
+  ],
+  "way/155977438": [
+   "maternidade"
+  ],
+  "way/541359025": [
+   "maternidade"
+  ],
+  "way/342652619": [
+   "maternidade"
+  ],
+  "way/112545594": [
+   "maternidade"
+  ],
+  "way/169536209": [
+   "maternidade"
+  ],
+  "way/166576348": [
+   "maternidade"
+  ],
+  "way/567956450": [
+   "maternidade"
+  ],
+  "node/5227094558": [
+   "maternidade"
+  ],
+  "way/358193659": [
+   "maternidade"
+  ],
+  "way/229123318": [
+   "maternidade"
+  ],
+  "way/282697178": [
+   "maternidade"
+  ],
+  "way/940457864": [
+   "maternidade"
+  ],
+  "way/232209608": [
+   "maternidade"
+  ],
+  "way/828128504": [
+   "maternidade"
+  ],
+  "way/510427026": [
+   "maternidade"
+  ],
+  "way/173078954": [
+   "maternidade"
+  ],
+  "way/71571984": [
+   "maternidade"
+  ],
+  "way/467861629": [
+   "maternidade"
+  ],
+  "way/304644256": [
+   "maternidade"
+  ],
+  "way/115235575": [
+   "maternidade"
+  ],
+  "way/156449735": [
+   "maternidade"
+  ],
+  "way/113221513": [
+   "maternidade"
+  ],
+  "relation/15697749": [
+   "maternidade"
+  ],
+  "way/303503663": [
+   "maternidade"
+  ],
+  "relation/13478475": [
+   "maternidade"
+  ],
+  "way/235944289": [
+   "maternidade"
+  ],
+  "way/182876161": [
+   "maternidade"
+  ],
+  "relation/6452262": [
+   "maternidade"
+  ],
+  "way/1012042653": [
+   "maternidade"
+  ],
+  "way/962320608": [
+   "maternidade"
+  ],
+  "relation/9905421": [
+   "maternidade"
+  ],
+  "way/194605869": [
+   "maternidade"
+  ]
+ },
+ "remover": [
+  "way/230101599",
+  "way/571100099"
+ ],
+ "unidades_extra": [
+  {
+   "id": "extra/braganca-uhb",
+   "nome": "Unidade Hospitalar de Bragança (ULS Nordeste)",
+   "lat": 41.806,
+   "lon": -6.757,
+   "tipos": [
+    "urgencia",
+    "maternidade"
+   ],
+   "urgencia": "sim",
+   "operador": "ULS do Nordeste",
+   "localidade": "Bragança"
+  }
+ ]
+}

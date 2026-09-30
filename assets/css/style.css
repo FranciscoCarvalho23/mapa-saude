@@ -1,0 +1,605 @@
+/* Mapa de acesso à saúde — folha de estilo única.
+   Sem animações nem efeitos decorativos: tipografia clara, contornos sólidos e cor
+   só onde carrega informação (a escala de acesso). */
+
+:root {
+    --tinta: #1C2B36;
+    --tinta-suave: #52636E;
+    --fundo: #EEF2F3;
+    --papel: #FFFFFF;
+    --linha: #D3DCE0;
+    --linha-forte: #B4C1C8;
+    --acento: #2457A6;
+    --acento-fundo: #E8EFF8;
+
+    /* escala de acesso (mesmas cores no mapa e no painel) */
+    --bom: #2B8A6E;
+    --limitado: #D69A2D;
+    --deserto: #B0364A;
+    --sem-dados: #9AA6AE;
+
+    /* versões para texto, com contraste suficiente sobre fundo claro */
+    --bom-texto: #1F6B54;
+    --limitado-texto: #8A5D0F;
+    --deserto-texto: #9C2E40;
+
+    /* fundos suaves das células da tabela */
+    --bom-caixa: #E6F4EF;
+    --limitado-caixa: #FBF1DC;
+    --deserto-caixa: #F8E5E8;
+
+    --fonte: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+/* Tema escuro: as cores da escala sobem de luminosidade para continuarem legíveis. */
+:root[data-tema="escuro"] {
+    --tinta: #E4EAEE;
+    --tinta-suave: #9FB0BA;
+    --fundo: #131A20;
+    --papel: #1B242B;
+    --linha: #2E3B45;
+    --linha-forte: #44545F;
+    --acento: #7EA9E8;
+    --acento-fundo: #23324A;
+
+    --bom: #4FBF9C;
+    --limitado: #E3B45C;
+    --deserto: #E0788B;
+    --sem-dados: #6B7C87;
+
+    --bom-texto: #6FD3B2;
+    --limitado-texto: #EECB84;
+    --deserto-texto: #F0919F;
+
+    --bom-caixa: #1B3A33;
+    --limitado-caixa: #3A3222;
+    --deserto-caixa: #3B242A;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; height: 100%; }
+
+body {
+    font-family: var(--fonte);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--tinta);
+    background: var(--fundo);
+}
+
+/* ---------- estrutura ---------- */
+
+.app {
+    display: grid;
+    grid-template-columns: minmax(340px, 400px) 1fr;
+    height: 100%;
+}
+
+.painel {
+    overflow-y: auto;
+    padding: 22px 20px 30px;
+    background: var(--papel);
+    border-right: 1px solid var(--linha);
+}
+
+.mapa { height: 100%; background: var(--fundo); }
+
+.cabecalho-topo { display: flex; align-items: flex-start; gap: 10px; }
+.cabecalho h1 { margin: 0; font-size: 1.5rem; line-height: 1.25; flex: 1; }
+.cabecalho p { margin: 8px 0 0; font-size: 0.95rem; color: var(--tinta-suave); }
+
+button.icone {
+    flex: none;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    font-size: 1.1rem;
+    color: var(--tinta);
+    background: var(--papel);
+    border: 1px solid var(--linha-forte);
+}
+button.icone:hover { background: var(--fundo); }
+
+/* ---------- formulários ---------- */
+
+label {
+    display: block;
+    margin: 18px 0 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--tinta-suave);
+}
+
+input[type="search"], select {
+    width: 100%;
+    padding: 9px 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--tinta);
+    background: var(--papel);
+    border: 1px solid var(--linha-forte);
+    border-radius: 3px;
+}
+
+input[type="search"]:focus, select:focus { border-color: var(--acento); }
+
+.linha-pesquisa { display: flex; gap: 8px; }
+.linha-pesquisa input { flex: 1; min-width: 0; }
+
+button {
+    padding: 9px 14px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    background: var(--acento);
+    border: 1px solid var(--acento);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover { filter: brightness(0.92); }
+button:disabled { opacity: 0.55; cursor: progress; }
+
+button.secundario { color: var(--acento); background: var(--papel); }
+button.secundario:hover { background: var(--acento-fundo); filter: none; }
+
+button.link {
+    padding: 0;
+    color: var(--acento);
+    background: none;
+    border: 0;
+    font-weight: 400;
+    text-decoration: underline;
+}
+button.link:hover { filter: none; text-decoration-thickness: 2px; }
+
+:focus-visible { outline: 3px solid #F2B63D; outline-offset: 2px; }
+
+.dica { margin: 8px 0 0; font-size: 0.9rem; color: var(--tinta-suave); }
+.opcao { display: flex; gap: 8px; text-transform: none; letter-spacing: 0; font-weight: 400; font-size: 0.95rem; color: var(--tinta); }
+.opcao input { margin-top: 4px; flex: none; }
+
+code {
+    padding: 1px 4px;
+    font-size: 0.85em;
+    background: var(--fundo);
+    border: 1px solid var(--linha);
+    border-radius: 2px;
+}
+
+/* ---------- sugestões de pesquisa ---------- */
+
+.sugestoes { list-style: none; margin: 10px 0 0; padding: 0; }
+.sugestoes:empty { display: none; }
+
+.sugestoes .grupo {
+    padding: 8px 0 2px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--tinta-suave);
+}
+
+.sugestoes button {
+    display: block;
+    width: 100%;
+    padding: 7px 8px;
+    text-align: left;
+    font-weight: 400;
+    color: var(--tinta);
+    background: var(--papel);
+    border: 0;
+    border-bottom: 1px solid var(--linha);
+}
+.sugestoes button:hover { background: var(--acento-fundo); filter: none; }
+.sug-nome { display: block; }
+.sug-detalhe { display: block; font-size: 0.82rem; color: var(--tinta-suave); }
+.sugestoes .info, .sugestoes .erro { padding: 8px 0; font-size: 0.9rem; }
+
+/* ---------- separadores ---------- */
+
+.separadores {
+    display: flex;
+    gap: 2px;
+    margin: 22px 0 0;
+    border-bottom: 2px solid var(--linha);
+}
+
+.separadores button {
+    flex: 1;
+    padding: 9px 4px;
+    font-size: 0.9rem;
+    color: var(--tinta-suave);
+    background: none;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    border-radius: 0;
+    margin-bottom: -2px;
+}
+.separadores button:hover { color: var(--tinta); background: var(--fundo); filter: none; }
+.separadores button[aria-selected="true"] { color: var(--acento); border-bottom-color: var(--acento); }
+
+.folha { padding-top: 4px; }
+
+/* ---------- blocos ---------- */
+
+.bloco { margin-top: 28px; padding-top: 16px; border-top: 2px solid var(--linha); }
+.bloco.sem-topo { margin-top: 16px; padding-top: 0; border-top: 0; }
+.bloco h2 { margin: 0 0 4px; font-size: 1.15rem; }
+.bloco h3 { margin: 16px 0 6px; font-size: 1rem; }
+.bloco > p { margin: 0 0 12px; font-size: 0.93rem; color: var(--tinta-suave); }
+
+.botoes { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; }
+
+.info { font-size: 0.88rem; color: var(--tinta-suave); }
+.info:empty { display: none; }
+.aviso { margin: 4px 0 0; font-size: 0.9rem; color: var(--limitado-texto); }
+.erro { color: var(--deserto-texto); }
+.destaque { margin: 0 0 10px; font-size: 1.05rem; font-weight: 700; }
+.oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+/* ---------- resultados de um ponto ---------- */
+
+.resultados:empty { display: none; }
+.resultados { margin-top: 16px; }
+.local { margin: 0 0 12px; font-size: 1.05rem; font-weight: 700; }
+
+.resultado {
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    background: var(--papel);
+    border: 1px solid var(--linha);
+    border-left: 5px solid var(--sem-dados);
+    border-radius: 3px;
+}
+.r-bom { border-left-color: var(--bom); }
+.r-limitado { border-left-color: var(--limitado); }
+.r-deserto { border-left-color: var(--deserto); }
+
+.resultado header { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.resultado h3 { margin: 0; font-size: 1rem; }
+.tempo { margin: 0; font-size: 0.9rem; color: var(--tinta-suave); }
+.tempo strong { font-size: 1.6rem; color: var(--tinta); }
+
+.escala { position: relative; display: flex; height: 7px; margin: 10px 0 6px; border-radius: 4px; overflow: hidden; }
+.escala span { display: block; opacity: 0.55; }
+.marca {
+    position: absolute;
+    top: -3px;
+    width: 3px;
+    height: 13px;
+    margin-left: -1px;
+    background: var(--tinta);
+}
+
+.estado { margin: 0; font-size: 0.9rem; font-weight: 700; }
+.r-bom .estado { color: var(--bom-texto); }
+.r-limitado .estado { color: var(--limitado-texto); }
+.r-deserto .estado { color: var(--deserto-texto); }
+.r-sem_dados .estado { color: var(--tinta-suave); }
+
+.destino { margin: 6px 0 0; font-size: 0.93rem; }
+.acoes { margin-top: 8px; }
+.resultado details { margin-top: 8px; font-size: 0.9rem; }
+.resultado summary { cursor: pointer; color: var(--acento); }
+.resultado ol { margin: 6px 0 0; padding-left: 20px; }
+.resultado li { margin-bottom: 3px; }
+
+/* ---------- percurso ---------- */
+
+.tempo-percurso { margin: 2px 0 10px; color: var(--tinta-suave); }
+.tempo-percurso strong { font-size: 1.3rem; color: var(--tinta); }
+
+.passos { list-style: none; margin: 0 0 12px; padding: 0; counter-reset: passo; }
+.passos li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 7px 0 7px 26px;
+    position: relative;
+    font-size: 0.92rem;
+    border-bottom: 1px solid var(--linha);
+}
+.passos li::before {
+    counter-increment: passo;
+    content: counter(passo);
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 18px;
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--tinta-suave);
+}
+.passo-dist { flex: none; color: var(--tinta-suave); font-size: 0.85rem; }
+
+/* ---------- moradas guardadas ---------- */
+
+.lista-moradas { list-style: none; margin: 0 0 12px; padding: 0; }
+.lista-moradas > li { padding: 10px 0; border-bottom: 1px solid var(--linha); }
+.morada-topo { display: flex; align-items: baseline; gap: 10px; }
+.morada-topo strong { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.morada-nome { margin: 2px 0 8px; font-size: 0.85rem; color: var(--tinta-suave); overflow-wrap: anywhere; }
+
+.morada-tempos { display: flex; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.morada-tempos li {
+    flex: 1;
+    padding: 6px 4px;
+    text-align: center;
+    border: 1px solid var(--linha);
+    border-radius: 3px;
+}
+.morada-tipo { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em; }
+.morada-min { display: block; font-weight: 700; }
+
+/* ---------- comparação ---------- */
+
+.tabela-scroll { overflow-x: auto; }
+
+.tabela-comparacao, .tabela-antes-depois { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+
+.tabela-comparacao th, .tabela-comparacao td,
+.tabela-antes-depois th, .tabela-antes-depois td {
+    padding: 7px 6px;
+    text-align: left;
+    border-bottom: 1px solid var(--linha);
+    vertical-align: top;
+}
+.tabela-comparacao th:first-child, .tabela-comparacao td:first-child { padding-left: 0; }
+.tabela-comparacao th:last-child, .tabela-comparacao td:last-child { padding-right: 0; width: 1%; }
+
+.tabela-comparacao thead th, .tabela-antes-depois thead th {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--tinta-suave);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+.tabela-comparacao thead th abbr { text-decoration: none; border: 0; }
+
+/* a coluna da morada é a que se deixa espremer, para os três tipos caberem */
+.tabela-comparacao tbody th {
+    font-weight: 400;
+    font-size: 0.85rem;
+    max-width: 96px;
+    min-width: 74px;
+    overflow-wrap: anywhere;
+}
+.tabela-comparacao td { white-space: nowrap; }
+.tabela-comparacao td strong { font-size: 1rem; }
+
+.letra, .marca-comparacao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--tinta);
+    color: var(--papel);
+    font-weight: 700;
+}
+.letra { width: 20px; height: 20px; margin-right: 6px; font-size: 0.75rem; vertical-align: 1px; }
+
+.destino-curto {
+    display: block;
+    max-width: 66px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--tinta-suave);
+}
+
+.c-bom { background: var(--bom-caixa); color: var(--bom-texto); }
+.c-limitado { background: var(--limitado-caixa); color: var(--limitado-texto); }
+.c-deserto { background: var(--deserto-caixa); color: var(--deserto-texto); }
+.c-sem_dados { color: var(--tinta-suave); }
+
+/* a melhor morada de cada coluna */
+.vence { box-shadow: inset 3px 0 0 currentColor; }
+
+.tabela-antes-depois td { font-weight: 700; }
+.tabela-antes-depois .melhor { color: var(--bom-texto); }
+
+/* ---------- grelha e retrato ---------- */
+
+.resumo-grelha:empty { display: none; }
+.resumo-grelha, #resumo-planeamento, #resumo-influencia { margin-top: 14px; }
+
+.barra-resumo { display: flex; height: 12px; margin-bottom: 10px; border-radius: 3px; overflow: hidden; }
+.barra-resumo span { display: block; }
+
+.legenda, .factos, .legenda-mapa { list-style: none; margin: 0; padding: 0; font-size: 0.92rem; }
+
+.legenda-mapa li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+.legenda-mapa .amostra { flex: none; width: 14px; height: 14px; margin-top: 4px; border-radius: 50%; }
+.legenda-mapa .amostra.cheia { background: var(--cor); border: 1px solid var(--cor); }
+.legenda-mapa .amostra.vazia { background: var(--papel); border: 2px solid var(--cor); }
+.legenda li { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+.legenda .quadrado { width: 14px; height: 14px; border-radius: 2px; flex: none; }
+.factos li { margin-bottom: 3px; }
+
+.cartoes { display: flex; gap: 8px; list-style: none; margin: 0 0 12px; padding: 0; }
+.cartoes li {
+    flex: 1;
+    padding: 12px 8px;
+    text-align: center;
+    background: var(--fundo);
+    border: 1px solid var(--linha);
+    border-radius: 3px;
+}
+.cartao-num { display: block; font-size: 1.6rem; font-weight: 700; line-height: 1.1; }
+.cartao-rot { display: block; font-size: 0.75rem; color: var(--tinta-suave); }
+
+.barras { list-style: none; margin: 8px 0 10px; padding: 0; }
+.barras li { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.9rem; }
+.barra-rot { flex: none; width: 108px; }
+.barra-sub { display: block; font-size: 0.75rem; color: var(--tinta-suave); }
+.barra-fundo { flex: 1; height: 14px; background: var(--fundo); border: 1px solid var(--linha); border-radius: 3px; overflow: hidden; }
+.barra-valor { display: block; height: 100%; }
+.barra-num { flex: none; width: 40px; text-align: right; font-weight: 700; }
+
+.notas { margin-top: 30px; padding-top: 14px; border-top: 1px solid var(--linha); font-size: 0.82rem; color: var(--tinta-suave); }
+.notas a { color: inherit; }
+.estado-ligacao { font-weight: 700; color: var(--limitado-texto); }
+
+/* ---------- mapa ---------- */
+
+.leaflet-container { font-family: var(--fonte); font-size: 14px; background: var(--fundo); }
+
+/* mapa de fundo discreto, para as cores dos dados sobressaírem */
+.tiles { filter: grayscale(1) contrast(0.85) brightness(1.08); }
+.tiles-escuro { filter: grayscale(1) invert(1) brightness(0.85) contrast(1.1); }
+
+.leaflet-control-layers-overlays label { display: flex; align-items: center; margin: 0; font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 0.9rem; color: var(--tinta); }
+.leaflet-control-layers, .leaflet-bar a { background: var(--papel); color: var(--tinta); }
+.leaflet-bar a { border-bottom-color: var(--linha); }
+
+.bola {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    margin: 0 6px 0 4px;
+    border-radius: 50%;
+    background: var(--cor);
+}
+
+.popup { display: flex; flex-direction: column; gap: 2px; min-width: 200px; }
+.popup strong { font-size: 1rem; }
+.popup span { color: var(--tinta-suave); }
+.popup-acoes { display: flex; gap: 6px; margin-top: 8px; }
+.popup-acoes button { padding: 6px 9px; font-size: 0.85rem; }
+.popup a { margin-top: 6px; font-size: 0.85rem; }
+
+.marca-comparacao { font-size: 0.85rem; border: 2px solid var(--papel); }
+
+.marca-proposta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    background: var(--acento);
+    border: 3px solid var(--papel);
+    border-radius: 50%;
+}
+
+/* ---------- ficha de emergência ---------- */
+
+.ficha { display: none; }
+
+@media print {
+    /* só a ficha vai para o papel */
+    .app { display: none; }
+    .ficha[hidden] { display: none; }
+    .ficha {
+        display: block !important;
+        max-width: 17cm;
+        margin: 0 auto;
+        color: #000000;
+        font-family: var(--fonte);
+    }
+    .ficha h2 { margin: 0 0 4px; font-size: 20pt; }
+    .ficha-morada { margin: 0; font-size: 13pt; }
+    .ficha-coord { margin: 2px 0 12px; font-size: 10pt; color: #444444; }
+
+    .ficha-numeros { display: flex; gap: 16px; margin-bottom: 14px; }
+    .ficha-numeros > div { flex: 1; padding: 8px 10px; border: 2px solid #000000; }
+    .ficha-num { display: block; font-size: 17pt; font-weight: 700; }
+    .ficha-numeros span + span { font-size: 9.5pt; }
+
+    .ficha-tipo { margin-bottom: 12px; page-break-inside: avoid; }
+    .ficha-tipo h3 { margin: 0 0 4px; font-size: 12pt; border-bottom: 1px solid #000000; }
+    .ficha-tipo ol { margin: 0; padding-left: 18px; font-size: 10.5pt; }
+    .ficha-tipo li { margin-bottom: 6px; }
+    .ficha-detalhe { font-size: 9.5pt; color: #333333; }
+
+    .ficha-rodape { margin-top: 16px; padding-top: 6px; font-size: 8.5pt; color: #444444; border-top: 1px solid #999999; }
+
+    @page { margin: 1.5cm; }
+}
+
+/* ---------- ecrãs pequenos: mapa em cima, painel por baixo ---------- */
+
+@media (max-width: 860px) {
+    .app { grid-template-columns: 1fr; height: auto; }
+    .mapa { grid-row: 1; height: 52vh; }
+    .painel { grid-row: 2; border-right: 0; overflow: visible; padding: 18px 16px 28px; }
+    .cabecalho h1 { font-size: 1.35rem; }
+    .separadores button { font-size: 0.85rem; padding: 9px 2px; }
+    .cartoes { flex-wrap: wrap; }
+}
+
+/* ---------- Pessoas: o mapa lido em gente ---------- */
+
+/* Alternador pessoas/área. Duas leituras do mesmo mapa, uma a um clique da outra. */
+.alternador { display: inline-flex; margin-bottom: 10px; border: 1px solid var(--linha-forte); border-radius: 4px; overflow: hidden; }
+.alternador button {
+    padding: 5px 14px; font: inherit; font-size: 0.85rem; color: var(--tinta-suave);
+    background: var(--papel); border: 0; cursor: pointer;
+}
+.alternador button + button { border-left: 1px solid var(--linha); }
+.alternador button.ativo { color: var(--papel); background: var(--acento); font-weight: 700; }
+.alternador button:not(.ativo):hover { background: var(--acento-fundo); color: var(--tinta); }
+
+.cartao-pessoas { padding: 14px 0; border-top: 1px solid var(--linha); }
+.cartao-pessoas:first-child { border-top: 0; padding-top: 0; }
+.cartao-pessoas h3 { margin: 0 0 8px; font-size: 1rem; }
+
+.sub-titulo { margin: 16px 0 6px; font-size: 0.95rem; }
+.sub { color: var(--tinta-suave); font-weight: 400; font-size: 0.88em; }
+
+.tabela-pessoas { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 0.9rem; }
+.tabela-pessoas th, .tabela-pessoas td { padding: 5px 6px; text-align: right; border-bottom: 1px solid var(--linha); }
+.tabela-pessoas thead th { font-size: 0.8rem; color: var(--tinta-suave); text-align: right; }
+.tabela-pessoas th:first-child, .tabela-pessoas thead th:first-child { text-align: left; font-weight: 400; }
+.tabela-pessoas tbody th { font-weight: 400; }
+.tabela-pessoas .quadrado { display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 2px; vertical-align: baseline; }
+
+.tabela-rolavel { max-height: 340px; overflow-y: auto; border: 1px solid var(--linha); border-radius: 4px; }
+.tabela-piores td:first-child { color: var(--tinta-suave); text-align: right; }
+.tabela-piores tbody tr:hover { background: var(--acento-fundo); }
+
+/* Frase pronta a citar: o projeto só serve para alguma coisa se estes números
+   saírem daqui para um relatório ou uma notícia, e com a fonte colada. */
+.citar { margin-top: 10px; padding: 10px 12px; background: var(--acento-fundo); border-radius: 4px; }
+.citar .frase { margin: 0 0 6px; font-size: 0.88rem; line-height: 1.5; }
+
+/* Onde a morada analisada fica no país. */
+.percentil { margin: 6px 0 0; font-size: 0.9rem; color: var(--tinta-suave); }
+.percentil strong { color: var(--tinta); }
+
+.contexto { margin-top: 14px; padding: 12px 14px; background: var(--papel); border: 1px solid var(--linha); border-radius: 4px; }
+.contexto h3 { margin: 0 0 6px; font-size: 0.95rem; }
+.contexto p { margin: 0 0 4px; font-size: 0.92rem; }
+.numero-grande { font-size: 1.15rem; }
+
+.numero-destaque { margin: 0 0 8px; font-size: 1rem; }
+.numero-destaque strong { font-size: 1.1rem; }
+
+/* Marcas numeradas das manchas críticas do ranking nacional. */
+.marca-critica {
+    display: flex; align-items: center; justify-content: center;
+    font: 700 0.8rem/1 var(--fonte); color: #FFFFFF;
+    background: #7D1F31; border: 2px solid #FFFFFF; border-radius: 50%;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.alternador-mapa { margin-top: 4px; }
+.alternador-mapa button { font-size: 0.82rem; padding: 5px 10px; }
+
+/* Otimizador: campos e propostas. */
+.linha-campos { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.linha-campos label { margin: 0; }
+.linha-campos input[type="number"] { width: 5rem; }
+
+.escolha { margin: 0 0 10px; padding: 8px 10px; border: 1px solid var(--linha); border-radius: 4px; }
+.escolha legend { padding: 0 4px; font-size: 0.85rem; color: var(--tinta-suave); }
+.escolha .opcao { display: block; margin: 4px 0; font-size: 0.9rem; }

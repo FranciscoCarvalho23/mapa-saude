@@ -1,0 +1,14 @@
+{
+    "name": "Quanto tempo até ao hospital?",
+    "short_name": "Acesso à saúde",
+    "description": "Tempo de viagem até à urgência, centro de saúde e maternidade mais próximos, em Portugal.",
+    "start_url": "index.php",
+    "scope": "./",
+    "display": "standalone",
+    "background_color": "#EEF2F3",
+    "theme_color": "#1C2B36",
+    "lang": "pt-PT",
+    "icons": [
+        { "src": "assets/icone.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+    ]
+}

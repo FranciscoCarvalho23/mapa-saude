@@ -1,0 +1,62 @@
+This project contains two things under two different licences.
+
+================================================================================
+1. CODE  (everything except the data/ folder)
+================================================================================
+
+MIT License
+
+Copyright (c) 2026 Francisco Carvalho
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+2. DATA  (the data/ folder)  -- NOT covered by the MIT licence above
+================================================================================
+
+data/unidades.json
+data/correcoes.json
+data/portugal.geojson
+data/grelha_*.json
+data/modelo_tempo_*.json
+
+    Derived from OpenStreetMap.
+    © OpenStreetMap contributors, https://www.openstreetmap.org/copyright
+    Licensed under the Open Database License (ODbL) v1.0:
+    https://opendatacommons.org/licenses/odbl/1-0/
+
+    These are Derivative Databases under the ODbL. You may copy, distribute and
+    adapt them, provided you attribute OpenStreetMap and release any derived
+    database under the same licence.
+
+data/populacao_pt.csv
+data/grelha_*.json (the population figures inside them)
+
+    Derived from Eurostat, Census 2021 population grid.
+    © European Union, 2026.
+    Source: https://ec.europa.eu/eurostat/web/gisco/geodata/population-distribution/population-grids
+
+    The data has been MODIFIED by this project: filtered to Portugal,
+    reprojected from ETRS89-LAEA (EPSG:3035) to WGS84, and aggregated onto a
+    coarser grid. Reuse is permitted provided the source is acknowledged and
+    the modification is declared. See the "População" section of the README.
+
+Travel times are computed with OSRM (https://project-osrm.org/) over the
+OpenStreetMap road network, and are estimates without traffic. Base map tiles
+are © OpenStreetMap contributors.

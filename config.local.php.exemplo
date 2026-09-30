@@ -1,0 +1,18 @@
+<?php
+// Copia este ficheiro para config.local.php e mete o teu contacto real.
+// O config.local.php NÃO vai para o Git: é onde ficam os dados só teus.
+//
+// Copy this file to config.local.php and put your real contact in it.
+// config.local.php is NOT committed: it is where your own settings live.
+
+return [
+    // Obrigatório. As políticas do Nominatim e do OSRM exigem um contacto real.
+    // Required. Nominatim and OSRM policies require a real contact address.
+    'user_agent' => 'MapaAcessoSaude/1.0 (projeto academico; contacto: altera-este-email@exemplo.com)',
+
+    // Descomenta se tiveres um OSRM próprio a correr (ver README).
+    // Uncomment if you are running your own OSRM (see README).
+    // 'osrm_url'        => 'http://localhost:5000',
+    // 'osrm_max_coords' => 1000,
+    // 'intervalo_osrm'  => 0,
+];

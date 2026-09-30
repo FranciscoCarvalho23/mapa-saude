@@ -1,0 +1,45 @@
+# Cache de runtime (OSRM, Nominatim, blocos do Overpass).
+# Runtime cache. Never committed.
+cache/*
+!cache/.htaccess
+
+# Definições locais: contém o teu email real.
+# Local settings: contains your real email address.
+config.local.php
+
+# Node (só usado pelos testes de browser).
+# Node (only used by the browser tests).
+node_modules/
+package.json
+package-lock.json
+
+# Estado dos servidores falsos usados nos testes.
+# State files from the mock servers used in tests.
+testes/falso_estado.json
+testes/falso_pedidos.log
+testes/falso_*.log
+testes/falso_*.json
+
+# Ficheiros de sistema.
+# OS junk.
+.DS_Store
+__MACOSX/
+
+# --------------------------------------------------------------------------
+# O QUE VAI PARA O REPOSITÓRIO / WHAT IS COMMITTED
+#
+# data/unidades.json        arranque imediato sem chamar o Overpass
+# data/correcoes.json       correções manuais: 41 das 47 maternidades vêm daqui
+# data/populacao_pt.csv     grelha do Eurostat já reduzida a Portugal (~1 MB)
+# data/portugal.geojson     polígono do país
+# data/grelha_*.json        mapas nacionais (~170 KB cada)
+# data/modelo_tempo_*.json  modelo treinado (~88 KB cada)
+#
+# Os mapas nacionais e o modelo são commitados de propósito: sem eles o
+# separador «Pessoas» e o mapa de criticidade não funcionam numa instalação
+# nova, e regerá-los exige um OSRM próprio. São menos de 1 MB no total.
+# --------------------------------------------------------------------------
+
+# Resultados de otimização: pesados, derivados, e fáceis de voltar a gerar.
+# Optimisation runs: heavy, derived, cheap to regenerate.
+data/otimizacao_*.json
